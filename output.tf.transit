@@ -1,0 +1,14 @@
+
+##start of jc testing
+output "resource_group" {
+    value       = module.resource_group.names
+}
+
+output "networking_transit_vnet_vnet_nsg" {
+    value       = module.networking_transit_vnet.nsg_vnet
+}
+
+output "networking_transit_vnet_vnet_subnets" {
+    value       = module.networking_transit_vnet.vnet_subnets
+}
+##end of jc testing
