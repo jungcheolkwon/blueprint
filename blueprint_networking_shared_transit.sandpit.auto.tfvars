@@ -11,7 +11,7 @@ resource_groups_shared_transit = {
 # Settings for the shared services egress vnet
 networking_transit = {
         vnet = {
-            name                = "_Shared_Transit"
+            name                = "Shared-Transit"
             address_space       = ["172.16.0.0/23"]   
             dns                 = ["192.168.0.16", "192.168.0.64"]
         }
@@ -30,10 +30,10 @@ networking_transit = {
                 nsg_inbound         = [
 		    ["OFFICE", "101", "Inbound", "Allow", "*", "*", "*", "42.61.112.56/32", "*"],
                     ["OFFICE0", "102", "Inbound", "Allow", "*", "*", "*", "111.223.104.76/32", "*"],
-                    ["HOME", "103", "Inbound", "Allow", "*", "*", "*", "218.212.240.201/32", "*"],
+                    ["HOME", "103", "Inbound", "Allow", "*", "*", "*", "222.164.69.68/32", "*"],
                     ["AWS", "104", "Inbound", "Allow", "*", "*", "*", "13.209.178.180/32", "*"],
                     ["Azure", "105", "Inbound", "Allow", "*", "*", "*", "13.67.35.126/32", "*"],
-                ]
+		]
                 nsg_outbound        = []
             }
              }
@@ -51,7 +51,7 @@ networking_transit = {
 
 # Settings for the public IP address to be used for egress
 public_ip_addr = {
-    name   = "arnaud-pip-vpn"
+    name   = "caf-pip-vpn"
     allocation_method = "Dynamic"
     sku               = "Basic"
     #For basic SKU, you can pick the zone to be deployed - if you want multi zone - pick Standard IP and pick AZ aware VPN gateway SKU
@@ -75,7 +75,7 @@ provision_gateway = false
 gateway_config  = {
     gateway_type                 = "VPN" 
     # Possible values are "VPN" or "ExpressRoute"
-    vpn_gateway_name             = "magateway"
+    vpn_gateway_name             = "mygateway"
     active_active                = false
     #An active-active gateway requires a HighPerformance or an UltraPerformance sku. If false, an active-standby gateway will be created. Defaults to false.
     enable_bgp                   = false 
@@ -107,7 +107,7 @@ connection_name = "onpremconnection"
 remote_network_connect = true
 
 remote_network = {
-    gateway_name = "arnaudlocalnetwork"
+    gateway_name = "caf_local_network"
     gateway_ip = "1.2.3.4"
     gateway_adress_space = ["1.0.0.0/8"]
 }

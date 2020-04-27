@@ -86,13 +86,23 @@ resource "azurerm_network_interface" "F5n" {
   resource_group_name       = var.resource_group_name
   location                  = var.location
   tags                      = var.tags
-  network_security_group_id = var.network_security_group_id
+  #network_security_group_id = var.network_security_group_id
 
   ip_configuration {
     name                          = "ipconfig${count.index}"
+    primary			  = true
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Static"
     private_ip_address            = "172.16.1.11"
     public_ip_address_id          = length(azurerm_public_ip.F5n.*.id) > 0 ? element(concat(azurerm_public_ip.F5n.*.id, list("")), count.index) : ""
+    application_security_group_ids = [azurerm_application_security_group.F5n.id]
+  }
+
+  ip_configuration {
+    name                          = "ipconfig1${count.index}"
+    subnet_id                     = var.subnet_id
+    private_ip_address_allocation = "Static"
+    private_ip_address            = "172.16.1.9"
+    application_security_group_ids = [azurerm_application_security_group.F5n.id]
   }
 }
