@@ -40,7 +40,7 @@ The last step in this stage, you need to run rover landingzone_vdc_demo to bring
 $ cd /tf/caf/landingzones/landingzone_vdc_demo/blueprint
 $ ./copytoeach.sh
 $ rover login
-$ launchpad /tf/launchpads/launchpad_opensource_light apply 
+$ launchpad /tf/launchpads/launchpad_opensource_light apply [-var 'location=southeastasia']
 $ rover /tf/caf/landingzones/landingzone_caf_foundations apply
 $ rover /tf/caf/landingzones/landingzone_vdc_demo apply
 ```
