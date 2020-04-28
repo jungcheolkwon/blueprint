@@ -1,0 +1,19 @@
+{
+    "class": "AS3",
+    "op": "remove",
+    "path": "Sample_net_sec_01",
+    "persist": true,
+    "declaration": {
+        "class": "ADC",
+        "schemaVersion": "3.0.0",
+        "id": "firewall",
+        "label": "Sample Network Security 1",
+        "remark": "Firewall policy, rule, and logging example",
+        "controls": {
+        "trace": true
+        },
+        "Sample_net_sec_01": {
+            "class": "Tenant"
+        }
+    }
+}

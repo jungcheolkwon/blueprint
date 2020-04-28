@@ -17,10 +17,10 @@ variable "subnet_id" {
   default = ""
 }
 
-#variable "network_security_group_id" {
-#  description = "(Required) network security group id"
-#  default = ""
-#}
+variable "network_security_group_id" {
+  description = "(Required) network security group id"
+  default = ""
+}
 
 variable "virtual_network_name" {
   description = "(Required) Tags for the logs repositories to be created "

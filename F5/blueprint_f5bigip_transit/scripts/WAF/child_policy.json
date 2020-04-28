@@ -1,0 +1,10 @@
+{
+    "name":"ASM_POLICY_CHILD_TEST",
+    "description":"Test ASM policy",
+    "applicationLanguage":"utf-8",
+    "parentPolicyName": "/Common/ASM_POLICY_TEST",
+    "enforcementMode":"transparent",
+    "protocolIndependent":"true",
+    "learningMode":"disabled",
+    "serverTechnologyName": "Apache Tomcat"
+}
