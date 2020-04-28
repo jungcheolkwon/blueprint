@@ -12,6 +12,8 @@ set host [lindex $argv 0]
 spawn ssh -o StrictHostKeyChecking=no $name@$host
 
 expect ".*#"
+send "modify auth password-policy policy-enforcement disabled\n"
+expect ".*#"
 send "modify auth password $name\n"
 expect ".*"
 send "$password\r"
