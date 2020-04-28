@@ -92,6 +92,5 @@ resource "azurerm_network_interface" "F5m" {
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = length(azurerm_public_ip.F5m.*.id) > 0 ? element(concat(azurerm_public_ip.F5m.*.id, list("")), count.index) : ""
-    application_security_group_ids = [azurerm_application_security_group.F5m.id]
   }
 }
