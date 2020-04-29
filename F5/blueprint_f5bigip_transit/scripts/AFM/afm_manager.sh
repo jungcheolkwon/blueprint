@@ -23,7 +23,54 @@ rg=$prefix-hub-network-transit
 lb_name=Azure-LB-Public-IP
 
 ip=$(az network public-ip show -n $lb_name -g $rg --query ipAddress -o tsv)
+if [ $1 == module ]
+then
+  if [ $1 == check ]
+then
+	module=$2
+	#for bigip1
+	echo -e "\033[32m ----- bigip1-0 -------------------------\033[0m "
+        token=$(curl -sk -H "Content-Type: application/json" -X POST -d '{"username":"'$name'","password":"'$password'","loginProviderName":"tmos"}' https://$ip:8443/mgmt/shared/authn/login | jq -r .token.token)
 
+        curl -sk -H "Content-Type: application/json" -H "X-F5-Auth-Token: $token" -X GET https://$ip:8443/mgmt/tm/sys/provision/$module | jq -r .
+
+	#for bigip2
+	echo -e "\033[32m ----- bigip2-0 -------------------------\033[0m "
+	token=$(curl -sk -H "Content-Type: application/json" -X POST -d '{"username":"'$name'","password":"'$password'","loginProviderName":"tmos"}' https://$ip:9443/mgmt/shared/authn/login | jq -r .token.token)
+	
+	curl -sk -H "Content-Type: application/json" -H "X-F5-Auth-Token: $token" -X GET https://$ip:9443/mgmt/tm/sys/provision/$module | jq -r .
+
+elif [ $1 == enable ]
+then
+
+	 module=$2
+	#for bigip1
+	 echo -e "\033[32m ----- bigip1-0 ------\033[0m "
+	 token=$(curl -sk -H "Content-Type: application/json" -X POST -d '{"username":"'$name'","password":"'$password'","loginProviderName":"tmos"}' https://$ip:8443/mgmt/shared/authn/login | jq -r .token.token)
+
+	 curl -sk -H "Content-Type: application/json" -H "X-F5-Auth-Token: $token" -X PATCH -d '{"level": "nominal"}' https://$ip:8443/mgmt/tm/sys/provision/$module | jq -r .
+
+	#for bigip2
+	 echo -e "\033[32m ----- bigip2-0 ------\033[0m "
+	 token=$(curl -sk -H "Content-Type: application/json" -X POST -d '{"username":"'$name'","password":"'$password'","loginProviderName":"tmos"}' https://$ip:9443/mgmt/shared/authn/login | jq -r .token.token)
+
+	 curl -sk -H "Content-Type: application/json" -H "X-F5-Auth-Token: $token" -X PATCH -d '{"level": "nominal"}' https://$ip:9443/mgmt/tm/sys/provision/$module | jq -r .
+
+elif [ $1 == disable ]
+then
+	 module=$2
+	#for bigip1
+	 echo -e "\033[32m ----- bigip1-0 ------\033[0m "
+	 token=$(curl -sk -H "Content-Type: application/json" -X POST -d '{"username":"'$name'","password":"'$password'","loginProviderName":"tmos"}' https://$ip:8443/mgmt/shared/authn/login | jq -r .token.token)
+
+	 curl -sk -H "Content-Type: application/json" -H "X-F5-Auth-Token: $token" -X PATCH -d '{"level": "none"}' https://$ip:8443/mgmt/tm/sys/provision/$module | jq -r .
+
+	#for bigip2
+	 echo -e "\033[32m ----- bigip2-0 ------\033[0m "
+	 token=$(curl -sk -H "Content-Type: application/json" -X POST -d '{"username":"'$name'","password":"'$password'","loginProviderName":"tmos"}' https://$ip:9443/mgmt/shared/authn/login | jq -r .token.token)
+
+	 curl -sk -H "Content-Type: application/json" -H "X-F5-Auth-Token: $token" -X PATCH -d '{"level": "none"}' https://$ip:9443/mgmt/tm/sys/provision/$module | jq -r .
+  fi
 if [ $1 == add ]
 then
 
@@ -53,4 +100,14 @@ then
   #curl -sk -H "Content-Type: test/x-yaml" -H "X-F5-Auth-Token: $token" -X POST --data-binary @afm.rm.json https://$ip:9443/mgmt/shared/appsvcs/declare | jq -r .
   curl -sk -H "Content-Type: application/json" -H "X-F5-Auth-Token: $token" -X POST -d '{"command":"run", "utilCmdArgs": "-c \"tmsh run cm config-sync to-group sync-group\""}' https://$ip:8443/mgmt/tm/util/bash | jq -r .
 
+elif [ $1 == check ]
+  echo -e "\033[32m ----- bigip1-0 ------\033[0m "
+	token=$(curl -sk -H "Content-Type: application/json" -X POST -d '{"username":"'$name'","password":"'$password'","loginProviderName":"tmos"}' https://$ip:8443/mgmt/shared/authn/login | jq -r .token.token)
+	curl -sk -H "X-F5-Auth-Token: $token" -X GET https://$ip:8443/mgmt/tm/security/firewall/policy | jq -r .
+
+	 echo -e "\033[32m ----- bigip2-0 ------\033[0m "
+	token=$(curl -sk -H "Content-Type: application/json" -X POST -d '{"username":"'$name'","password":"'$password'","loginProviderName":"tmos"}' https://$ip:9443/mgmt/shared/authn/login | jq -r .token.token)
+	curl -sk -H "X-F5-Auth-Token: $token" -X GET https://$ip:9443/mgmt/tm/security/firewall/policy | jq -r .
+
 fi
+
