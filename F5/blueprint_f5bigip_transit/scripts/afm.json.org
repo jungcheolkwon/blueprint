@@ -6,19 +6,17 @@
         "class": "ADC",
         "schemaVersion": "3.0.0",
         "id": "firewall",
-        "label": "Sample Network Security",
+        "label": "Sample Network Security 1",
         "remark": "Firewall policy, rule, and logging example",
         "controls": {
         "trace": true
         },
-        "Sample_net_sec": {
+        "Sample_net_sec_01": {
             "class": "Tenant",
             "fwFastL4": {
                 "fwAllowedAddressList": {
                     "class": "Firewall_Address_List",
                     "addresses": [
-                        "222.164.69.68/32",
-                        "111.223.104.70/32",
                         "10.0.0.0/8",
                         "172.20.0.0/16",
                         "192.168.0.0/16"
@@ -96,10 +94,10 @@
                     "members": [
                         {
                             "serverAddresses": [
-                                "172.16.1.6"
+                                "192.168.120.6"
                             ],
                             "enable": true,
-                            "servicePort": 80
+                            "servicePort": 514
                         }
                     ],
                     "monitors": [
@@ -115,7 +113,7 @@
                         53,
                         80,
                         443,
-                        "8080-8084"
+                        "8080-8081"
                     ]
                 },
                 "fwSecurityLogProfile": {
@@ -166,11 +164,10 @@
                     "members": [
                         {
                             "serverAddresses": [
-                                "192.168.31.3",
-                                "172.16.1.6"
+                                "192.168.31.3"
                             ],
                             "enable": true,
-                            "servicePort": 80
+                            "servicePort": 0
                         }
                     ],
                     "monitors": [
@@ -213,4 +210,3 @@
         }
     }
 }
-
