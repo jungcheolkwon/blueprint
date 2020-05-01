@@ -14,11 +14,11 @@ do
 
   if [ $i == "bigip1-0" ]
   then
-    echo -e "\033[32m.sync-group is configuring on $i \033[0m "
+    echo -e "\033[32m.Sync-group is configuring on $i \033[0m "
     $dir/blueprint_f5bigip_transit/scripts/sync1.sh "$ip"
 
   else
-    echo -e "\033[32m.sync-group is configuring on $i \033[0m "
+    echo -e "\033[32m.Sync-group is configuring on $i \033[0m "
     $dir/blueprint_f5bigip_transit/scripts/sync2.sh "$ip"
 fi
 done
