@@ -28,7 +28,6 @@
                "members": [{
                   "servicePort": 80,
                   "serverAddresses": [
-                     "172.16.1.4",
                      "172.16.1.5",
                      "172.16.1.6"
                   ]

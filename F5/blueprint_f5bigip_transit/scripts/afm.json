@@ -96,7 +96,7 @@
                     "members": [
                         {
                             "serverAddresses": [
-                                "172.16.1.6"
+                                "172.16.1.4"
                             ],
                             "enable": true,
                             "servicePort": 80
@@ -167,7 +167,7 @@
                         {
                             "serverAddresses": [
                                 "192.168.31.3",
-                                "172.16.1.6"
+                                "172.16.1.4"
                             ],
                             "enable": true,
                             "servicePort": 80
