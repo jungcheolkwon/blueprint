@@ -14,6 +14,7 @@ rg=$prefix-hub-network-transit
 lb_name=Azure-LB-Public-IP
 
 ip=$(az network public-ip show -n $lb_name -g $rg --query ipAddress -o tsv)
+
 token=$(curl -sk -H "Content-Type: application/json" -X POST -d '{"username":"'$name'","password":"'$password'","loginProviderName":"tmos"}' https://$ip:8443/mgmt/shared/authn/login | jq -r .token.token)
 token2=$(curl -sk -H "Content-Type: application/json" -X POST -d '{"username":"'$name'","password":"'$password'","loginProviderName":"tmos"}' https://$ip:9443/mgmt/shared/authn/login | jq -r .token.token)
 
