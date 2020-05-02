@@ -12,7 +12,7 @@ Move to your local directory where you want to download them. Example will use /
 
 ```sh
 $ cd ~/Docker
-$ git clone https://github.com/aztfmod/landingzones.git
+$ git clone https://github.com/Azure/caf-terraform-landingzones.git
 $ cd landingzones/landingzones/landingzone_vdc_demo/
 $ git clone https://github.com/jungcheolkwon/blueprint.git
 ```
