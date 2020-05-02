@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 #edited by JC
 #j.kwon@f5.com
@@ -14,7 +14,7 @@ rg=$prefix-hub-network-transit
 lb_name=Azure-LB-Public-IP
 
 #waiting for asm provisioning
-sleep 30
+sleep 60
 
 ip=$(az network public-ip show -n $lb_name -g $rg --query ipAddress -o tsv)
 token=$(curl -sk -H "Content-Type: application/json" -X POST -d '{"username":"'$name'","password":"'$password'","loginProviderName":"tmos"}' https://$ip:8443/mgmt/shared/authn/login | jq -r .token.token)
